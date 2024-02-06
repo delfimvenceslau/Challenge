@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <canvas id="myChart" width="2000" height="1000"></canvas>
-    </div>
+    <div v-if="loading" class="loader">Carregando...</div>
+    <canvas id="myChart" width="2000" height="1000"></canvas>
 </template>
   
 <script>
@@ -11,6 +10,7 @@ import Cards from '../components/Cards.vue';
 export default {
     data() {
         return {
+            loading: true,
             chartData: null,
             confirmedCases: 0,
             recoveredCases: 0,
@@ -26,6 +26,8 @@ export default {
             this.createChart();
         } catch (error) {
             console.error('Erro durante a montagem:', error);
+        }finally{
+            this.loading = false;
         }
     },
     methods: {
@@ -40,4 +42,3 @@ export default {
     components: { Cards },
 };
 </script>
-  
